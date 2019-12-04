@@ -50,7 +50,7 @@ services:
     networks:
       - default
 
- php56:
+  php56:
    build:
      context: ./services/php
      args:
@@ -109,7 +109,7 @@ services:
   #     MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
   #     TZ: "$TZ"
 
- mysql5:
+  mysql5:
    image: mysql:${MYSQL5_VERSION}
    container_name: mysql5
    ports:
@@ -124,7 +124,7 @@ services:
      MYSQL_ROOT_PASSWORD: "${MYSQL5_ROOT_PASSWORD}"
      TZ: "$TZ"
 
- openresty:
+  openresty:
    image:  openresty/openresty:${OPENRESTY_VERSION}
    container_name: openresty
    ports:
@@ -143,7 +143,7 @@ services:
    networks:
      - default
 
- redis:
+  redis:
    image: redis:${REDIS_VERSION}
    container_name: redis
    ports:
@@ -168,7 +168,7 @@ services:
 #    networks:
 #      - default
 
- rabbitmq:
+  rabbitmq:
    image: rabbitmq:${RABBITMQ_VERSION}
    container_name: rabbitmq
    restart: always
@@ -182,7 +182,7 @@ services:
    networks:
          - default
 
- phpmyadmin:
+  phpmyadmin:
    image: phpmyadmin/phpmyadmin:latest
    container_name: phpmyadmin
    ports:
@@ -197,7 +197,7 @@ services:
      - PMA_PORT=3306
      - TZ=$TZ
 
- phpredisadmin:
+  phpredisadmin:
    image: erikdubbelboer/phpredisadmin:latest
    container_name: phpredisadmin
    ports:
