@@ -294,5 +294,41 @@ services:
     networks:
       - default
 
+  # stunnel-server:
+  #   image: vimagick/stunnel
+  #   container_name: stunnel-server
+  #   ports:
+  #     - "4911:4911"
+  #   environment:
+  #     - CLIENT=no
+  #     - SERVICE=openvpn
+  #     - ACCEPT=0.0.0.0:4911
+  #     - CONNECT=server:1194
+  #   external_links:
+  #     - openvpn_server_1:server
+  #   restart: always
+  #   networks:
+  #     - default
+
+  stunnel-client:
+    image: vimagick/stunnel
+    container_name: stunnel-client
+    ports:
+      - "${STUNNEL_CLIENT_PORT}:${STUNNEL_CLIENT_PORT}"
+    volumes:
+      - ./logs/stunnel:/var/log/stunnel4
+      - ./services/stunnel/stunnel.key:/etc/stunnel/stunnel.key:ro
+      - ./services/stunnel/stunnel.crt:/etc/stunnel/stunnel.pem:ro
+      - ./services/stunnel/client.conf:/etc/stunnel/stunnel.conf
+    environment:
+      - CLIENT=yes
+      - SERVICE=openvpn
+      - ACCEPT=0.0.0.0:${STUNNEL_CLIENT_PORT}
+      - CONNECT=server:${STUNNEL_CLIENT_SERVER_PORT}
+    extra_hosts:
+      - server:${STUNNEL_CLIENT_SERVER_HOST}
+    restart: always
+    networks:
+      - default
 networks:
   default:
