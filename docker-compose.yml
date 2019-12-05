@@ -288,7 +288,7 @@ services:
     container_name: portainer
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/docker-vol/portainer/data:/data
+      - ${DATA_DIR}/portainer/data:/data:rw
     ports:
       - "${PORTAINER_HOST_PORT}:9000"
     networks:
