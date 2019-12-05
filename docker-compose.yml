@@ -379,5 +379,20 @@ services:
     restart: always
     networks:
       - default
+
+  # #创建php容器执行一个php常驻脚本
+  # statscript:
+  #   image: dnmp_php:latest
+  #   container_name: statscript
+  #   volumes:
+  #     - ${SOURCE_DIR}:/www/:rw
+  #     - ${PHP_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+  #     - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+  #     - ${PHP_LOG_DIR}:/var/log/php
+  #     - ${DATA_DIR}/composer:/tmp/composer
+  #   command: /bin/sh /www/localhost/start.sh
+  #   restart: always
+  #   networks:
+  #     - default
 networks:
   default:
