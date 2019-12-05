@@ -304,6 +304,7 @@ services:
       - ./services/stunnel/stunnel.key:/etc/stunnel/stunnel.key:ro
       - ./services/stunnel/stunnel.crt:/etc/stunnel/stunnel.pem:ro
       - ./services/stunnel/server.conf:/etc/stunnel/stunnel.conf
+      - ./services/stunnel/stunnel4:/etc/default/stunnel4
     environment:
       - CLIENT=no
       - SERVICE=${STUNNEL_SERVER_NAME}
@@ -325,6 +326,7 @@ services:
       - ./services/stunnel/stunnel.key:/etc/stunnel/stunnel.key:ro
       - ./services/stunnel/stunnel.crt:/etc/stunnel/stunnel.pem:ro
       - ./services/stunnel/client.conf:/etc/stunnel/stunnel.conf
+      - ./services/stunnel/stunnel4:/etc/default/stunnel4
     environment:
       - CLIENT=yes
       - SERVICE=${STUNNEL_CLIENT_NAME}
@@ -332,6 +334,18 @@ services:
       - CONNECT=server:${STUNNEL_CLIENT_CONNECT_PORT}
     extra_hosts:
       - server:${STUNNEL_CLIENT_CONNECT_HOST}
+    restart: always
+    networks:
+      - default
+
+  squid:
+    image: sameersbn/squid:3.5.27-2
+    container_name: squid
+    ports:
+      - "3128:3128"
+    volumes:
+      - ./services/squid/squid.conf:/etc/squid/squid.conf
+      - ./services/squid/cache:/var/spool/squid
     restart: always
     networks:
       - default
