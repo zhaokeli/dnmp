@@ -362,5 +362,22 @@ services:
     restart: always
     networks:
       - default
+
+  ngrok:
+    build:
+      context: ./services/ngrok
+    container_name: ngrok
+    ports:
+      - "${NGROK_HTTP_PORT}:80"
+      - "${NGROK_HTTPS_PORT}:443"
+      - "${NGROK_TUNNEL_PORT}:4443"
+    volumes:
+      - ${DATA_DIR}/ngrok:/myfiles
+    environment:
+      - DOMAIN="${NGROK_DOMAIN}"
+    command: /bin/sh /server.sh
+    restart: always
+    networks:
+      - default
 networks:
   default:
