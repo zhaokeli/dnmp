@@ -294,27 +294,32 @@ services:
     networks:
       - default
 
-  # stunnel-server:
-  #   image: vimagick/stunnel
-  #   container_name: stunnel-server
-  #   ports:
-  #     - "4911:4911"
-  #   environment:
-  #     - CLIENT=no
-  #     - SERVICE=openvpn
-  #     - ACCEPT=0.0.0.0:4911
-  #     - CONNECT=server:1194
-  #   external_links:
-  #     - openvpn_server_1:server
-  #   restart: always
-  #   networks:
-  #     - default
+  stunnel-server:
+    image: vimagick/stunnel
+    container_name: stunnel-server
+    ports:
+      - "${STUNNEL_SERVER_ACCEPT_PORT}:${STUNNEL_SERVER_ACCEPT_PORT}"
+    volumes:
+      - ./logs/stunnel:/var/log/stunnel4
+      - ./services/stunnel/stunnel.key:/etc/stunnel/stunnel.key:ro
+      - ./services/stunnel/stunnel.crt:/etc/stunnel/stunnel.pem:ro
+      - ./services/stunnel/server.conf:/etc/stunnel/stunnel.conf
+    environment:
+      - CLIENT=no
+      - SERVICE=${STUNNEL_SERVER_NAME}
+      - ACCEPT=0.0.0.0:${STUNNEL_SERVER_ACCEPT_PORT}
+      - CONNECT=server:${STUNNEL_SERVER_CONNECT_PORT}
+    external_links:
+      - openvpn_server_1:${STUNNEL_SERVER_CONNECT_HOST}
+    restart: always
+    networks:
+      - default
 
   stunnel-client:
     image: vimagick/stunnel
     container_name: stunnel-client
     ports:
-      - "${STUNNEL_CLIENT_PORT}:${STUNNEL_CLIENT_PORT}"
+      - "${STUNNEL_CLIENT_ACCEPT_PORT}:${STUNNEL_CLIENT_ACCEPT_PORT}"
     volumes:
       - ./logs/stunnel:/var/log/stunnel4
       - ./services/stunnel/stunnel.key:/etc/stunnel/stunnel.key:ro
@@ -322,11 +327,11 @@ services:
       - ./services/stunnel/client.conf:/etc/stunnel/stunnel.conf
     environment:
       - CLIENT=yes
-      - SERVICE=openvpn
-      - ACCEPT=0.0.0.0:${STUNNEL_CLIENT_PORT}
-      - CONNECT=server:${STUNNEL_CLIENT_SERVER_PORT}
+      - SERVICE=${STUNNEL_CLIENT_NAME}
+      - ACCEPT=0.0.0.0:${STUNNEL_CLIENT_ACCEPT_PORT}
+      - CONNECT=server:${STUNNEL_CLIENT_CONNECT_PORT}
     extra_hosts:
-      - server:${STUNNEL_CLIENT_SERVER_HOST}
+      - server:${STUNNEL_CLIENT_CONNECT_HOST}
     restart: always
     networks:
       - default
