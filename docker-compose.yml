@@ -362,9 +362,9 @@ services:
     ports:
       - "${SCM_MANAGER_PORT}:${SCM_MANAGER_PORT}"
     volumes:
+      - ${SOURCE_DIR}:/www/:rw
       - ${DATA_DIR}/scm:/var/lib/scm:rw
       - ./logs/scm:/var/log/scm:rw
-      - ./services/scm/scm-server:/etc/default/scm-server:rw
     restart: always
     networks:
       - default
