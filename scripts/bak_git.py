@@ -5,6 +5,7 @@ import oss2
 import time
 import sys
 import config
+
 # 是否删除本地备份,如果上传oss开启后此项生效
 isRemoveBak = True
 # 是否备份到oss
@@ -16,10 +17,8 @@ endpoint = 'oss-cn-beijing.aliyuncs.com'
 bucketName = 'xiangce-archive'
 ossBakPath = 'gitbak/'  # 远程oss备份路径
 bakpath = 'D:/gitbak'  # 本地备份路径
-# 要备份的目录路径
-baklist = ['D:/.scm']
-# 要忽略的文件或目录
-ignoreDirOrFile = []
+baklist = ['D:/.scm']  # 要备份的目录路径
+ignoreDirOrFile = []  # 要忽略的文件或目录
 
 
 def percentage(consumed_bytes, total_bytes):
