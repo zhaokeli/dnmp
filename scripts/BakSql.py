@@ -19,13 +19,14 @@ mysqldump_path = Config.mysqldump_path
 locBakPath = Config.bakRootPath + '/sqlbak'
 if mysqldump_path == '':
     mysqldump_path = 'mysqldump'
+isDocker = Config.isDocker
 
 
 class kl_log:
 
     def __init__(self, filename='kl_log'):
         self.filename = filename + '-'
-        self.filepath = './data/log/'
+        self.filepath = Config.logPath + '/'
 
     def setpath(self, filepath):
         self.filepath = filepath
@@ -61,9 +62,12 @@ def bakmysql(db_name, sss):
         database.append(zip_dest)
 
         print("开始备份数据库:%s..." % db_name)
-        os.system(mysqldump_path + " --skip-comments -h%s -u%s -p%s %s  --default_character-set=%s    > %s" % (db_host, db_user, db_passwd, db_name, db_charset, db_backup_name))
+        if isDocker:
+            os.system("docker exec -it mysql mysqldump  --skip-comments -u%s -p%s %s  --default_character-set=%s    > /opt/sql.sql" % (db_user, db_passwd, db_name, db_charset))
+            os.system("docker cp mysql:/opt/sql.sql " % db_backup_name)
+        else:
+            os.system(mysqldump_path + " --skip-comments -h%s -u%s -p%s %s  --default_character-set=%s    > %s" % (db_host, db_user, db_passwd, db_name, db_charset, db_backup_name))
         print("开始压缩数据库:%s..." % db_name)
-        # zip_files(zip_src,zip_dest)
         f = zipfile.ZipFile(zip_dest, 'w', zipfile.ZIP_DEFLATED)
         [dirname, filename] = os.path.split(zip_src)
         f.write(zip_src, './' + filename)
