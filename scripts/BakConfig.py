@@ -21,12 +21,10 @@ baklist = ['D:/Program Files/Huweishen.com/PHPWEB/MySQL Server 5.6/data', 'D:/gi
 ignoreDirOrFile = ['.git', 'runtime', 'Data', 'aspnet_client', 'imagethumb']
 
 
-# 数据库sql备份
-# 备份的邮箱
-mailto_list = ["735579768@qq.com"]
-# 要备份的数据库列表
-db_name = ['zhaokeli_com_db_new', 'beian', 'dflz.org', 'ruzhouba.com']
-# 数据库目录
-mysqldatapath = 'D:/Program Files/Huweishen.com/PHPWEB/MySQL Server 5.6/data/'
-# 备份目录
-mysqldatabakpath = '/databak/'
+# 数据库sql备份,请确保mysqldump在环境变量中能执行,也可以直接在下面设置
+mysqldump_path = ''
+db_host = "127.0.0.1"
+db_user = "root"
+db_passwd = "adminrootkl"
+db_name = ['hmcrm']
+db_charset = "utf8"

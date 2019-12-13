@@ -5,10 +5,6 @@ import oss2
 import time
 import sys
 
-# 是否删除本地备份,如果上传oss开启后此项生效
-isRemoveBak = True
-# 是否备份到oss
-isUploadOss = True
 
 # 显示上传进度
 
@@ -20,11 +16,11 @@ def percentage(consumed_bytes, total_bytes):
         sys.stdout.flush()
 
 
-class UploadOSS(object):
+class DirOrFileToOSS(object):
     """docstring for BakDir"""
 
     def __init__(self, arg):
-        super(UploadOSS, self).__init__()
+        super(DirOrFileToOSS, self).__init__()
         self.arg = arg
 
     def uploadoss(self, localfile, remotePath):
@@ -76,15 +72,15 @@ class UploadOSS(object):
 
     def run(self):
         for item in self.arg['baklist']:
-            zippath = item
-            if not os.path.isfile(item):
-                dirpath = item
-                zippath = "%s/%s-%s.zip" % (self.arg['locBakpath'], os.path.basename(item),
+            zippath = item['path']
+            if not os.path.isfile(zippath):
+                dirpath = item['path']
+                zippath = "%s/%s-%s.zip" % (item['locBakPath'], os.path.basename(item['locBakPath']),
                                             time.strftime('%Y-%m-%d_%H-%M-%S', time.localtime()))
-                self.zip_path(dirpath, zippath, self.arg['ignoreDirOrFile'])
-            if isUploadOss:
-                self.uploadoss(zippath, self.arg['ossBakPath'])
-            if isRemoveBak and isUploadOss:
+                self.zip_path(dirpath, zippath, item['ignoreDirOrFile'])
+            if item['isUploadOss']:
+                self.uploadoss(zippath, item['ossPath'])
+            if item['isRemoveLocBak'] and item['isUploadOss']:
                 os.remove(zippath)
 
 
