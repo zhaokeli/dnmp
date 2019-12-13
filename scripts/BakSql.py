@@ -7,13 +7,18 @@ import time
 import zipfile
 import threading
 import oss2
-
+import Config
+from DirOrFileToOSS import DirOrFileToOSS
 isDelFile = True
-db_host = "127.0.0.1"
-db_user = "root"
-db_passwd = "adminrootkl"
-db_name = ['hmcrm']
-db_charset = "utf8"
+db_host = Config.db_host
+db_user = Config.db_user
+db_passwd = Config.db_passwd
+db_name = Config.db_name
+db_charset = Config.db_charset
+mysqldump_path = Config.mysqldump_path
+locBakPath = Config.bakRootPath + '/sqlbak'
+if mysqldump_path == '':
+    mysqldump_path = 'mysqldump'
 
 
 class kl_log:
@@ -48,7 +53,7 @@ def bakmysql(db_name, sss):
     try:
         global baknum
         baknum = baknum + 1
-        db_backup_name = os.path.split(os.path.realpath(__file__))[0] + r"\data\bakmysql\%s_%s.sql" % (time.strftime("%Y-%m-%d_%H-%M-%S"), db_name)
+        db_backup_name = locBakPath + r"/%s_%s.sql" % (time.strftime("%Y-%m-%d_%H-%M-%S"), db_name)
         if os.path.exists(os.path.dirname(db_backup_name)) == False:
             os.makedirs(os.path.dirname(db_backup_name))
         zip_src = db_backup_name
@@ -56,7 +61,7 @@ def bakmysql(db_name, sss):
         database.append(zip_dest)
 
         print("开始备份数据库:%s..." % db_name)
-        os.system("mysqldump --skip-comments -h%s -u%s -p%s %s  --default_character-set=%s    > %s" % (db_host, db_user, db_passwd, db_name, db_charset, db_backup_name))
+        os.system(mysqldump_path + " --skip-comments -h%s -u%s -p%s %s  --default_character-set=%s    > %s" % (db_host, db_user, db_passwd, db_name, db_charset, db_backup_name))
         print("开始压缩数据库:%s..." % db_name)
         # zip_files(zip_src,zip_dest)
         f = zipfile.ZipFile(zip_dest, 'w', zipfile.ZIP_DEFLATED)
@@ -85,7 +90,7 @@ if __name__ == "__main__":
         pass
     # 压缩所有已经备份好的数据库
     print('正在压缩所有数据库为一个文件...')
-    db_backup_name = os.path.split(os.path.realpath(__file__))[0] + r"\data\bakmysql\%s_all.zip" % (time.strftime("%Y-%m-%d_%H-%M-%S"))
+    db_backup_name = locBakPath + r"/database-%s.zip" % (time.strftime("%Y-%m-%d_%H-%M-%S"))
     f = zipfile.ZipFile(db_backup_name, 'w', zipfile.ZIP_DEFLATED)
     for i in database:
         [dirname, filename] = os.path.split(i)
@@ -94,6 +99,29 @@ if __name__ == "__main__":
     f.close()
 
     print('正在把数据库上传至oss空间...')
-    # uploadoss(db_backup_name, 'webbak/')
-    # if isDelFile:
-    #     os.remove(db_backup_name)
+    config = {
+        'accessKeyID': Config.accessKeyID,
+        'accessKeySecret': Config.accessKeySecret,
+        'endpoint': Config.endpoint,
+        'bucketName': Config.bucketName,
+        'baklist': [
+            # git备份
+            {
+                # 要备份的目录(后面不带/)或文件全路径
+                'path': db_backup_name,
+                # 本地备份路径
+                'locBakPath': Config.bakRootPath + '/sqlbak',
+                # oss上传路径,结尾带 /
+                'ossPath': 'DataAutoBak/sqlbak/',
+                # 要忽略的文件或目录
+                'ignoreDirOrFile': ['.git', 'runtime', 'Data', 'aspnet_client', 'imagethumb'],
+                # 是否删除本地备份,如果上传oss为False时此设置不会生效
+                'isRemoveLocBak': False,
+                # 是否上传oss
+                'isUploadOss':True
+
+            },
+        ]
+    }
+    bak = DirOrFileToOSS(config)
+    bak.run()
