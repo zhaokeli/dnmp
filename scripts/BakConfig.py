@@ -8,14 +8,9 @@ ossEndpoint = 'oss-cn-beijing.aliyuncs.com'
 ossBucketName = 'xiangce-archive'
 
 
-isRemoveBak = True  # 是否删除本地备份,如果上传oss开启后此项生效
-isUploadOss = True  # 是否备份到oss
+# isRemoveBak = True  # 是否删除本地备份,如果上传oss开启后此项生效
+# isUploadOss = True  # 是否备份到oss
 
-# git备份
-ossBakPath = 'gitbak/'  # 远程oss备份路径
-bakpath = 'D:/gitbak'  # 本地备份路径
-baklist = ['D:/.scm']  # 要备份的git目录路径
-ignoreDirOrFile = []  # 要忽略的文件或目录
 
 # 目录备份
 ossBakPath = 'webbak/'  # 远程oss备份路径

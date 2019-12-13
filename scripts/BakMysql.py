@@ -160,21 +160,3 @@ if __name__ == "__main__":
     f.close()
     print('正在把数据库上传至oss空间...')
     uploadoss(db_backup_name)
-    # try:
-    #     pass
-    #     # input("所有数据库备份完成,按任意键继续...")
-    # except:
-    #     pass
-
-# yadir='D:/databak/'
-# zipfilepath='D:/zipfile.zip'
-# filelists = os.listdir(yadi)
-# if filelists == None or len(filelists) < 1:
-#     print (">>>>>>待压缩的文件目录：" + yadir + " 里面不存在文件,无需压缩. <<<<<<")
-# else:
-#     z = zipfile.ZipFile(zipfilepath, 'w' ,zipfile.ZIP_DEFLATED)
-#     for fil in filelists:
-#         filefullpath = os.path.join(yadir, fil)
-#         # filefullpath是文件的全路径，fil是文件名，这样就不会带目录啦
-#         z.write(filefullpath, fil)
-#     z.close()
