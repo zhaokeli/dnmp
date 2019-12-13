@@ -16,7 +16,9 @@ db_passwd = Config.db_passwd
 db_name = Config.db_name
 db_charset = Config.db_charset
 mysqldump_path = Config.mysqldump_path
-locBakPath = Config.bakRootPath + '/sqlbak'
+# 当前目录日期后缀
+dirsubfix = time.strftime('%Y/%m', time.localtime())
+locBakPath = Config.bakRootPath + '/sqlbak/' + dirsubfix
 if mysqldump_path == '':
     mysqldump_path = 'mysqldump'
 isDocker = Config.isDocker

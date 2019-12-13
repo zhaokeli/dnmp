@@ -71,15 +71,17 @@ class DirOrFileToOSS(object):
         return output_path
 
     def run(self):
+        # 当前目录日期后缀
+        dirsubfix = time.strftime('%Y/%m', time.localtime())
         for item in self.arg['baklist']:
             zippath = item['path']
             if not os.path.isfile(zippath):
                 dirpath = item['path']
-                zippath = "%s/%s-%s.zip" % (item['locBakPath'], os.path.basename(dirpath),
+                zippath = "%s/%s-%s.zip" % (item['locBakPath'] + '/' + dirsubfix, os.path.basename(dirpath),
                                             time.strftime('%Y-%m-%d_%H-%M-%S', time.localtime()))
                 self.zip_path(dirpath, zippath, item['ignoreDirOrFile'])
             if item['isUploadOss']:
-                self.uploadoss(zippath, item['ossPath'])
+                self.uploadoss(zippath, item['ossPath'] + dirsubfix + '/')
             if item['isRemoveLocBak'] and item['isUploadOss']:
                 os.remove(zippath)
 
