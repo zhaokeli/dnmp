@@ -50,6 +50,11 @@ class kl_log:
 log = kl_log()
 
 
+def runCmd(str):
+    print(str)
+    os.system(str)
+
+
 def bakmysql(db_name, sss):
     try:
         global baknum
@@ -63,17 +68,19 @@ def bakmysql(db_name, sss):
 
         print("开始备份数据库:%s..." % db_name)
         if isDocker:
-            os.system("docker exec -it mysql mysqldump  --skip-comments -u%s -p%s %s  --default_character-set=%s    > /opt/sql.sql" % (db_user, db_passwd, db_name, db_charset))
-            os.system("docker cp mysql:/opt/sql.sql " % db_backup_name)
+            runCmd("docker exec -it mysql mysqldump --skip-comments -u%s -p%s %s  --default_character-set=%s > %s" % (db_user, db_passwd, db_name, db_charset, db_backup_name))
         else:
-            os.system(mysqldump_path + " --skip-comments -h%s -u%s -p%s %s  --default_character-set=%s    > %s" % (db_host, db_user, db_passwd, db_name, db_charset, db_backup_name))
-        print("开始压缩数据库:%s..." % db_name)
-        f = zipfile.ZipFile(zip_dest, 'w', zipfile.ZIP_DEFLATED)
-        [dirname, filename] = os.path.split(zip_src)
-        f.write(zip_src, './' + filename)
-        f.close()
-        os.remove(zip_src)
-        print("数据库%s备份完成!" % db_name)
+            runCmd(mysqldump_path + " --skip-comments -h%s -u%s -p%s %s  --default_character-set=%s    > %s" % (db_host, db_user, db_passwd, db_name, db_charset, db_backup_name))
+        if os.path.isfile(db_backup_name):
+            print("开始压缩数据库:%s..." % db_name)
+            f = zipfile.ZipFile(zip_dest, 'w', zipfile.ZIP_DEFLATED)
+            [dirname, filename] = os.path.split(zip_src)
+            f.write(zip_src, './' + filename)
+            f.close()
+            os.remove(zip_src)
+            print("数据库%s备份完成!" % db_name)
+        else:
+            print("数据库SQL文件不存在!")
         baknum = baknum - 1
     except:
         baknum = baknum - 1
@@ -97,9 +104,10 @@ if __name__ == "__main__":
     db_backup_name = locBakPath + r"/database-%s.zip" % (time.strftime("%Y-%m-%d_%H-%M-%S"))
     f = zipfile.ZipFile(db_backup_name, 'w', zipfile.ZIP_DEFLATED)
     for i in database:
-        [dirname, filename] = os.path.split(i)
-        f.write(i, './' + filename)
-        os.remove(i)
+        if os.path.isfile(i):
+            [dirname, filename] = os.path.split(i)
+            f.write(i, './' + filename)
+            os.remove(i)
     f.close()
 
     print('正在把数据库上传至oss空间...')
