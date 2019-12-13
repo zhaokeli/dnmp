@@ -75,7 +75,7 @@ class DirOrFileToOSS(object):
             zippath = item['path']
             if not os.path.isfile(zippath):
                 dirpath = item['path']
-                zippath = "%s/%s-%s.zip" % (item['locBakPath'], os.path.basename(item['locBakPath']),
+                zippath = "%s/%s-%s.zip" % (item['locBakPath'], os.path.basename(dirpath),
                                             time.strftime('%Y-%m-%d_%H-%M-%S', time.localtime()))
                 self.zip_path(dirpath, zippath, item['ignoreDirOrFile'])
             if item['isUploadOss']:

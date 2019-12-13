@@ -1,15 +1,11 @@
 #! python3
-
-
+import os
+bakRootPath = os.getcwd() + '/../data/databak'
 # oss配置
-ossAccessKeyID = 'LTAIyRFV9OAyiMeT'
-ossAccessKeySecret = 'aOLFLanFp0YQDKZeJN4VAuXA1sKGKB'
-ossEndpoint = 'oss-cn-beijing.aliyuncs.com'
-ossBucketName = 'xiangce-archive'
-
-
-# isRemoveBak = True  # 是否删除本地备份,如果上传oss开启后此项生效
-# isUploadOss = True  # 是否备份到oss
+accessKeyID = 'LTAIyRFV9OAyiMeT'
+accessKeySecret = 'aOLFLanFp0YQDKZeJN4VAuXA1sKGKB'
+endpoint = 'oss-cn-beijing.aliyuncs.com'
+bucketName = 'xiangce-archive'
 
 
 # 目录备份
