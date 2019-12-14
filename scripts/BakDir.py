@@ -1,4 +1,4 @@
-#! python3
+#!/usr/bin/python3
 from DirOrFileToOSS import DirOrFileToOSS
 import Config
 import os
@@ -11,7 +11,7 @@ config = {
         # mysql5目录备份
         {
             # 要备份的目录(后面不带/)或文件全路径
-            'path':  os.getcwd() + '/../data/mysql5',
+            'path':  Config.dnmpDirPath + '/data/mysql5',
             # 本地备份路径
             'locBakPath': Config.bakRootPath + '/gitbak',
             # oss上传路径,结尾带 /
@@ -27,7 +27,7 @@ config = {
         # git备份
         {
             # 要备份的目录(后面不带/)或文件全路径
-            'path':  os.getcwd() + '/../data/scm',
+            'path':  Config.dnmpDirPath + '/data/scm',
             # 本地备份路径
             'locBakPath': Config.bakRootPath + '/gitbak',
             # oss上传路径,结尾带 /
@@ -43,7 +43,7 @@ config = {
         # web备份
         {
             # 要备份的目录(后面不带/)或文件全路径
-            'path': os.getcwd() + '/../www',
+            'path': Config.dnmpDirPath + '/www',
             # 本地备份路径
             'locBakPath': Config.bakRootPath + '/webbak',
             # oss上传路径,结尾带 /
