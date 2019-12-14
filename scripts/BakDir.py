@@ -13,7 +13,7 @@ config = {
             # 要备份的目录(后面不带/)或文件全路径
             'path':  Config.dnmpDirPath + '/data/mysql5',
             # 本地备份路径
-            'locBakPath': Config.bakRootPath + '/gitbak',
+            'locBakPath': Config.bakRootPath + '/dirbak',
             # oss上传路径,结尾带 /
             'ossPath': 'DataAutoBak/gitbak/',
             # 要忽略的文件或目录
@@ -29,7 +29,7 @@ config = {
             # 要备份的目录(后面不带/)或文件全路径
             'path':  Config.dnmpDirPath + '/data/scm',
             # 本地备份路径
-            'locBakPath': Config.bakRootPath + '/gitbak',
+            'locBakPath': Config.bakRootPath + '/dirbak',
             # oss上传路径,结尾带 /
             'ossPath': 'DataAutoBak/gitbak/',
             # 要忽略的文件或目录
@@ -45,7 +45,7 @@ config = {
             # 要备份的目录(后面不带/)或文件全路径
             'path': Config.dnmpDirPath + '/www',
             # 本地备份路径
-            'locBakPath': Config.bakRootPath + '/webbak',
+            'locBakPath': Config.bakRootPath + '/dirbak',
             # oss上传路径,结尾带 /
             'ossPath': 'DataAutoBak/webbak/',
             # 要忽略的文件或目录

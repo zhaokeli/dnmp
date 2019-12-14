@@ -9,3 +9,4 @@ www/*
 logs/*
 __pycache__
 /scripts/.Config.py
+/scripts/Config.py
