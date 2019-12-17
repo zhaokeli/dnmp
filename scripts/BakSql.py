@@ -1,12 +1,10 @@
 #!/usr/bin/python3
 import sys
 import time
-import io
 import os
-import time
 import zipfile
 import threading
-import oss2
+
 import Config
 from DirOrFileToOSS import DirOrFileToOSS
 isDelFile = True
@@ -39,7 +37,7 @@ class kl_log:
     def write(self, data='', model='a'):
         fname = time.strftime('%Y-%m-%d', time.localtime())
         fpath = '%s%s%s.log' % (self.filepath, self.filename, fname)
-        if os.path.exists(os.path.dirname(fpath)) == False:
+        if not os.path.exists(os.path.dirname(fpath)):
             os.makedirs(os.path.dirname(fpath))
 
         ti = time.strftime('%Y-%m-%d %X', time.localtime())
@@ -62,7 +60,7 @@ def bakmysql(db_name, sss):
         global baknum
         baknum = baknum + 1
         db_backup_name = locBakPath + r"/%s_%s.sql" % (time.strftime("%Y-%m-%d_%H-%M-%S"), db_name)
-        if os.path.exists(os.path.dirname(db_backup_name)) == False:
+        if not os.path.exists(os.path.dirname(db_backup_name)):
             os.makedirs(os.path.dirname(db_backup_name))
         zip_src = db_backup_name
         zip_dest = zip_src + ".zip"

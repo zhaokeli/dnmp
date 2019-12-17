@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 from DirOrFileToOSS import DirOrFileToOSS
 import Config
-import os
 config = {
     'accessKeyID': Config.accessKeyID,
     'accessKeySecret': Config.accessKeySecret,
