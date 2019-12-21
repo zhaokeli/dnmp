@@ -76,11 +76,11 @@ services:
   php56:
     build:
       context: ./services/php
-    args:
-      PHP_VERSION: php:${PHP56_VERSION}-fpm-alpine
-      CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
-      PHP_EXTENSIONS: ${PHP56_EXTENSIONS}
-      TZ: "$TZ"
+      args:
+        PHP_VERSION: php:${PHP56_VERSION}-fpm-alpine
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+        PHP_EXTENSIONS: ${PHP56_EXTENSIONS}
+        TZ: "$TZ"
     container_name: php56
     expose:
       - 9501
@@ -147,7 +147,7 @@ services:
       MYSQL_ROOT_PASSWORD: "${MYSQL5_ROOT_PASSWORD}"
       TZ: "$TZ"
 
-    openresty:
+  openresty:
     image:  openresty/openresty:${OPENRESTY_VERSION}
     container_name: openresty
     ports:
