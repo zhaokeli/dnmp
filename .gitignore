@@ -10,3 +10,8 @@ logs/*
 __pycache__
 /scripts/.Config.py
 /scripts/Config.py
+/services/stunnel/client.conf
+/services/stunnel/server.conf
+/services/stunnel/stunnel.crt
+/services/stunnel/stunnel.key
+/services/stunnel/stunnel4
