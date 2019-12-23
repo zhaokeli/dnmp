@@ -402,11 +402,12 @@ services:
   #   volumes:
   #     - ${DATA_DIR}/ngrok:/myfiles
   #   environment:
-  #     - DOMAIN="${NGROK_DOMAIN}"
+  #     - DOMAIN=${NGROK_DOMAIN}
   #   command: /bin/sh /server.sh
   #   restart: always
   #   networks:
   #     - default
+
 
   # #创建php容器执行一个php常驻脚本
   # statscript:
