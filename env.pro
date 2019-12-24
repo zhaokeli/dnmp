@@ -73,13 +73,13 @@ PHP_VERSION=7.2.25
 PHP_PHP_CONF_FILE=./services/php/php.ini
 PHP_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP_LOG_DIR=./logs/php
-PHP_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb
+PHP_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2
 
 PHP74_VERSION=7.4
 PHP74_PHP_CONF_FILE=./services/php/php4.ini
 PHP74_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP74_LOG_DIR=./logs/php
-PHP74_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb
+PHP74_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2
 #
 # PHP5.6
 #

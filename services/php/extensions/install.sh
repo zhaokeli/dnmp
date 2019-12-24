@@ -70,6 +70,7 @@ installExtensionFromTgz()
 }
 
 
+
 if [[ -z "${EXTENSIONS##*,pdo_mysql,*}" ]]; then
     echo "---------- Install pdo_mysql ----------"
     docker-php-ext-install ${MC} pdo_mysql
@@ -541,5 +542,19 @@ if [[ -z "${EXTENSIONS##*,xlswriter,*}" ]]; then
         docker-php-ext-enable xlswriter
     else
         echo "---------- PHP Version>= 7.0----------"
+    fi
+fi
+
+if [[ -z "${EXTENSIONS##*,ssh2,*}" ]]; then
+    echo "---------- Install ssh2 ----------"
+    isPhpVersionGreaterOrEqual 7 0
+    apk add --no-cache libssh2-dev
+    if [[ "$?" = "1" ]]; then
+        printf "\n" | pecl install ssh2-0.13
+        docker-php-ext-enable ssh2
+    else
+        # echo "---------- PHP Version>= 7.0----------"
+        printf "\n" | pecl install ssh2-1.2
+        docker-php-ext-enable ssh2
     fi
 fi
