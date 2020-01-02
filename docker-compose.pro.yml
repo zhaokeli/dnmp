@@ -175,6 +175,7 @@ services:
     volumes:
       - ${REDIS_CONF_FILE}:/etc/redis.conf:ro
       - ${DATA_DIR}/redis:/data/:rw
+      - ${REDIS_LOG_DIR}:/var/log/redis:rw
     restart: always
     entrypoint: ["redis-server", "/etc/redis.conf"]
     environment:

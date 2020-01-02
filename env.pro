@@ -175,6 +175,7 @@ MYSQL5_CONF_FILE=./services/mysql5/mysql.cnf
 REDIS_VERSION=5.0.3-alpine
 REDIS_HOST_PORT=6379
 REDIS_CONF_FILE=./services/redis/redis.conf
+REDIS_LOG_DIR=./logs/redis
 
 #
 # Memcached
