@@ -68,9 +68,9 @@ def bakmysql(db_name, sss):
 
         print("开始备份数据库:%s..." % db_name)
         if isDocker:
-            runCmd("docker exec mysql mysqldump --skip-comments -u%s -p%s %s  --default_character-set=%s > %s" % (db_user, db_passwd, db_name, db_charset, db_backup_name))
+            runCmd("docker exec mysql mysqldump --skip-extended-insert --skip-comments -u%s -p%s %s  --default_character-set=%s > %s" % (db_user, db_passwd, db_name, db_charset, db_backup_name))
         else:
-            runCmd(mysqldump_path + " --skip-comments -h%s -u%s -p%s %s  --default_character-set=%s    > %s" % (db_host, db_user, db_passwd, db_name, db_charset, db_backup_name))
+            runCmd(mysqldump_path + " --skip-extended-insert --skip-comments -h%s -u%s -p%s %s  --default_character-set=%s    > %s" % (db_host, db_user, db_passwd, db_name, db_charset, db_backup_name))
         if os.path.isfile(db_backup_name):
             print("开始压缩数据库:%s..." % db_name)
             f = zipfile.ZipFile(zip_dest, 'w', zipfile.ZIP_DEFLATED)
