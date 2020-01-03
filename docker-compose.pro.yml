@@ -376,6 +376,7 @@ services:
   #     - ./services/squid/squid.conf:/etc/squid/squid.conf
   #     - ./services/squid/cache:/var/spool/squid
   #     - ./logs/squid:/var/log/squid:rw
+  #     - ./services/squid/squid.passwd:/etc/squid/squid.passwd:ro
   #   restart: always
   #   networks:
   #     - default
