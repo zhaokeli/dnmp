@@ -1,8 +1,0 @@
-foreground = yes
-debug = warning
-
-[socks_server]
-protocol = socks
-accept = 9080
-cert = stunnel.crt
-key = stunnel.key

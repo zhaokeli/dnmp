@@ -338,9 +338,9 @@ services:
   #     - CLIENT=no
   #     - SERVICE=${STUNNEL_SERVER_NAME}
   #     - ACCEPT=0.0.0.0:${STUNNEL_SERVER_ACCEPT_PORT}
-  #     - CONNECT=server:${STUNNEL_SERVER_CONNECT_PORT}
-  #   external_links:
-  #     - openvpn_server_1:${STUNNEL_SERVER_CONNECT_HOST}
+  #     - CONNECT=proxy_server:${STUNNEL_SERVER_CONNECT_PORT}
+  #   extra_hosts:
+  #     - proxy_server:${STUNNEL_SERVER_CONNECT_HOST}
   #   restart: always
   #   networks:
   #     - default
@@ -375,6 +375,7 @@ services:
   #   volumes:
   #     - ./services/squid/squid.conf:/etc/squid/squid.conf
   #     - ./services/squid/cache:/var/spool/squid
+  #     - ./logs/squid:/var/log/squid:rw
   #   restart: always
   #   networks:
   #     - default
