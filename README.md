@@ -365,3 +365,5 @@ htpasswd -c squid.passwd youproxy(用户名)
 ## stunnel
 可以设置为服务端和客户端两种，services/stunnel中的server.conf client.conf不用设置，在.env文件中设置好对应的ip和端口后配置文件会自动生成  
 另个需要注意下，如果服务端连接的代理也为本机的一个容器的话，  STUNNEL_SERVER_CONNECT_HOST 这个值 要设置成代理容器分配的ip,不能设置成容器名字，也可以直接设置成宿主主的外网ip
+## redis
+默认情况下配置文件里设置啦验证密码 123654987
