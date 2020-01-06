@@ -381,15 +381,16 @@ services:
   #   networks:
   #     - default
 
-  scm-manager:
+  scm-server:
     image: sdorra/scm-manager
-    container_name: scm-manager
+    container_name: server
     ports:
       - "${SCM_MANAGER_PORT}:${SCM_MANAGER_PORT}"
     volumes:
       - ${SOURCE_DIR}:/www/:rw
       - ${DATA_DIR}/scm:/var/lib/scm:rw
       - ./logs/scm:/var/log/scm:rw
+      - "~/.ssh:/opt/scm-server/.ssh"
     restart: always
     networks:
       - default
@@ -426,5 +427,18 @@ services:
   #   restart: always
   #   networks:
   #     - default
+  # jenkins:
+  #   image: jenkins:latest
+  #   container_name: jenkins
+  #   environment:
+  #      DOCKER_URL: ''
+  #   volumes:
+  #     - "/etc/localtime:/etc/localtime:ro"
+  #     - "./data/jenkins:/var/jenkins_home"
+  #     - "/var/run/docker.sock:/var/run/docker.sock"
+  #     - "~/.ssh:/var/jenkins_home/.ssh"
+  #   ports:
+  #     - "8999:8080"
+  #     - "50000:50000"
 networks:
   default:
