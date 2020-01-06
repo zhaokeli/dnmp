@@ -8,6 +8,12 @@ SOURCE_DIR=./www
 #
 DATA_DIR=./data
 
+
+#
+# Log data directory
+#
+LOG_DIR=./logs
+
 #
 # Container Timezone
 #
@@ -215,6 +221,9 @@ STUNNEL_CLIENT_NAME=https
 STUNNEL_CLIENT_CONNECT_HOST=47.56.171.51
 STUNNEL_CLIENT_CONNECT_PORT=4128
 STUNNEL_CLIENT_ACCEPT_PORT=8880
+STUNNEL_CLIENT_KEY=./services/stunnel/stunnel.key
+STUNNEL_CLIENT_CRT=./services/stunnel/stunnel.crt
+STUNNEL_CLIENT_CONF=./services/stunnel/client.conf
 
 #
 # stunnel-server
@@ -223,16 +232,30 @@ STUNNEL_SERVER_NAME=https
 STUNNEL_SERVER_CONNECT_HOST=47.56.171.51
 STUNNEL_SERVER_CONNECT_PORT=4128
 STUNNEL_SERVER_ACCEPT_PORT=8881
+STUNNEL_SERVER_KEY=./services/stunnel/stunnel.key
+STUNNEL_SERVER_CRT=./services/stunnel/stunnel.crt
+STUNNEL_SERVER_CONF=./services/stunnel/server.conf
 
 #
 # scm-manager
 #
 SCM_MANAGER_PORT=8080
+SCM_SSH_DIR=~/.ssh
+
+#
+# jenkins
+#
+JENKINS_PORT=8999
+JENKINS_JNLP_PORT=50000
+JENKINS_SSH_DIR=~/.ssh
 
 #
 # squid
 #
 SQUID_PORT=3128
+SQUID_CONFIG=./services/squid/squid.conf
+SQUID_CACHE=./services/squid/cache
+SQUID_PASSWORD=./services/squid/squid.passwd
 
 #
 # ngrok
@@ -241,3 +264,12 @@ NGROK_HTTP_PORT=8082
 NGROK_HTTPS_PORT=8083
 NGROK_TUNNEL_PORT=4443
 NGROK_DOMAIN=ngrok.59vip.cn
+
+#
+# ipsec-vpn-server
+#
+VPN_IPSEC_PSK=your_ipsec_pre_shared_key
+VPN_USER=your_vpn_username
+VPN_PASSWORD=your_vpn_password
+VPN_PORT0=500
+VPN_PORT1=4500

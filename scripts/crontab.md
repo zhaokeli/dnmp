@@ -1,7 +1,6 @@
 # ubuntu 16.0.4
 # 每天执行sql备份
-
-
+# min   hour    day     month   weekday command
 # 添加环境变量到crontab -e中,且安装oss2 ,
 PYTHONPATH=$PYTHONPATH:/home/[用户名]/.local/lib/python3.5/site-packages
 

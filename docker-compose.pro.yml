@@ -329,10 +329,10 @@ services:
   #   ports:
   #     - "${STUNNEL_SERVER_ACCEPT_PORT}:${STUNNEL_SERVER_ACCEPT_PORT}"
   #   volumes:
-  #     - ./logs/stunnel:/var/log/stunnel4
-  #     - ./services/stunnel/stunnel.key:/etc/stunnel/stunnel.key:ro
-  #     - ./services/stunnel/stunnel.crt:/etc/stunnel/stunnel.pem:ro
-  #     - ./services/stunnel/server.conf:/etc/stunnel/stunnel.conf
+  #     - ${LOG_DIR}/stunnel:/var/log/stunnel4
+  #     - ${STUNNEL_SERVER_KEY}:/etc/stunnel/stunnel.key:ro
+  #     - ${STUNNEL_SERVER_CRT}:/etc/stunnel/stunnel.pem:ro
+  #     - ${STUNNEL_SERVER_CONF}:/etc/stunnel/stunnel.conf
   #     - ./services/stunnel/stunnel4:/etc/default/stunnel4
   #   environment:
   #     - CLIENT=no
@@ -351,10 +351,10 @@ services:
   #   ports:
   #     - "${STUNNEL_CLIENT_ACCEPT_PORT}:${STUNNEL_CLIENT_ACCEPT_PORT}"
   #   volumes:
-  #     - ./logs/stunnel:/var/log/stunnel4
-  #     - ./services/stunnel/stunnel.key:/etc/stunnel/stunnel.key:ro
-  #     - ./services/stunnel/stunnel.crt:/etc/stunnel/stunnel.pem:ro
-  #     - ./services/stunnel/client.conf:/etc/stunnel/stunnel.conf
+  #     - ${LOG_DIR}/stunnel:/var/log/stunnel4
+  #     - ${STUNNEL_CLIENT_CONF}:/etc/stunnel/stunnel.key:ro
+  #     - ${STUNNEL_CLIENT_CONF}:/etc/stunnel/stunnel.pem:ro
+  #     - ${STUNNEL_CLIENT_CONF}:/etc/stunnel/stunnel.conf
   #     - ./services/stunnel/stunnel4:/etc/default/stunnel4
   #   environment:
   #     - CLIENT=yes
@@ -373,10 +373,10 @@ services:
   #   ports:
   #     - "${SQUID_PORT}:${SQUID_PORT}"
   #   volumes:
-  #     - ./services/squid/squid.conf:/etc/squid/squid.conf
-  #     - ./services/squid/cache:/var/spool/squid
-  #     - ./logs/squid:/var/log/squid:rw
-  #     - ./services/squid/squid.passwd:/etc/squid/squid.passwd:ro
+  #     - ${SQUID_CONFIG}:/etc/squid/squid.conf
+  #     - ${SQUID_CACHE}:/var/spool/squid
+  #     - ${LOG_DIR}/squid:/var/log/squid:rw
+  #     - ${SQUID_PASSWORD}:/etc/squid/squid.passwd:ro
   #   restart: always
   #   networks:
   #     - default
@@ -389,8 +389,8 @@ services:
     volumes:
       - ${SOURCE_DIR}:/www/:rw
       - ${DATA_DIR}/scm:/var/lib/scm:rw
-      - ./logs/scm:/var/log/scm:rw
-      - "~/.ssh:/opt/scm-server/.ssh"
+      - ${LOG_DIR}/scm:/var/log/scm:rw
+      - ${SCM_SSH_DIR}:/opt/scm-server/.ssh
     restart: always
     networks:
       - default
@@ -427,18 +427,38 @@ services:
   #   restart: always
   #   networks:
   #     - default
+  #
   # jenkins:
   #   image: jenkins:latest
   #   container_name: jenkins
   #   environment:
   #      DOCKER_URL: ''
   #   volumes:
-  #     - "/etc/localtime:/etc/localtime:ro"
-  #     - "./data/jenkins:/var/jenkins_home"
-  #     - "/var/run/docker.sock:/var/run/docker.sock"
-  #     - "~/.ssh:/var/jenkins_home/.ssh"
+  #     - /etc/localtime:/etc/localtime:ro
+  #     - ${DATA_DIR}/jenkins:/var/jenkins_home
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - $JENKINS_SSH_DIR{}:/var/jenkins_home/.ssh
   #   ports:
-  #     - "8999:8080"
-  #     - "50000:50000"
+  #     - "${JENKINS_PORT}:8080"
+  #     - "${JENKINS_JNLP_PORT}:50000"
+  #   networks:
+  #     - default
+  #
+  vpn:
+    container_name: vpn-server
+    image: hwdsl2/ipsec-vpn-server
+    restart: always
+    env_file:
+      - VPN_IPSEC_PSK=${VPN_IPSEC_PSK}
+      - VPN_USER=${VPN_USER}
+      - VPN_PASSWORD=${VPN_PASSWORD}
+    ports:
+      - "${VPN_PORT0}:500/udp"
+      - "${VPN_PORT1}:4500/udp"
+    privileged: true
+    hostname: ipsec-vpn-server
+    networks:
+      - default
+
 networks:
   default:
