@@ -44,7 +44,6 @@ services:
       - ${PHP_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
       - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
       - ${PHP_LOG_DIR}:/var/log/php
-      - ${DATA_DIR}/composer:/tmp/composer
     restart: always
     cap_add:
       - SYS_PTRACE
@@ -66,7 +65,6 @@ services:
       - ${PHP74_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
       - ${PHP74_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
       - ${PHP74_LOG_DIR}:/var/log/php
-      - ${DATA_DIR}/composer:/tmp/composer
     restart: always
     cap_add:
       - SYS_PTRACE
@@ -89,7 +87,6 @@ services:
       - ${PHP56_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
       - ${PHP56_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
       - ${PHP56_LOG_DIR}:/var/log/php
-      - ${DATA_DIR}/composer:/tmp/composer
     restart: always
     cap_add:
       - SYS_PTRACE
@@ -110,7 +107,6 @@ services:
   #    - ${PHP54_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
   #    - ${PHP54_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
   #    - ${PHP54_LOG_DIR}:/var/log/php
-  #    - ${DATA_DIR}/composer:/tmp/composer
   #  restart: always
   #  cap_add:
   #    - SYS_PTRACE
@@ -422,7 +418,6 @@ services:
   #     - ${PHP_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
   #     - ${PHP_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
   #     - ${PHP_LOG_DIR}:/var/log/php
-  #     - ${DATA_DIR}/composer:/tmp/composer
   #   command: /bin/sh /www/localhost/start.sh
   #   restart: always
   #   networks:
