@@ -76,7 +76,7 @@ OPENRESTY_LOG_DIR=./logs/nginx
 # PHP_EXTENSIONS=pdo_mysql,mysqli,gd,curl,opcache
 #
 PHP_VERSION=7.2.25
-PHP_PHP_CONF_FILE=./services/php/php.ini
+PHP_PHP_CONF_FILE=./services/php/php72.ini
 PHP_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP_LOG_DIR=./logs/php
 PHP_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2
@@ -90,7 +90,7 @@ PHP74_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swo
 # PHP5.6
 #
 PHP56_VERSION=5.6.40
-PHP56_PHP_CONF_FILE=./services/php/php.ini
+PHP56_PHP_CONF_FILE=./services/php/php56.ini
 PHP56_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP56_LOG_DIR=./logs/php
 PHP56_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb
@@ -99,7 +99,7 @@ PHP56_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swo
 # PHP5.4
 #
 PHP54_VERSION=5.4.45
-PHP54_PHP_CONF_FILE=./services/php54/php.ini
+PHP54_PHP_CONF_FILE=./services/php54/php54.ini
 PHP54_FPM_CONF_FILE=./services/php54/php-fpm.conf
 PHP54_LOG_DIR=./logs/php
 PHP54_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache
