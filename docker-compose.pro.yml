@@ -285,6 +285,7 @@ services:
   #     - discovery.type=single-node
   #     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
   #   volumes:
+  #     - /etc/localtime:/etc/localtime:ro
   #     - ${DATA_DIR}/esdata:/usr/share/elasticsearch/data
   #     - ${ELASTICSEARCH_CONF_FILE}:/usr/share/elasticsearch/elasticsearch.yml
   #   hostname: elasticsearch
