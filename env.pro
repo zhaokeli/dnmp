@@ -69,7 +69,7 @@ OPENRESTY_LOG_DIR=./logs/nginx
 # recode,tidy,gmp,imap,ldap,imagick,sqlsrv,mcrypt,opcache,
 # redis,memcached,xdebug,swoole,pdo_sqlsrv,sodium,yaf,mysql,
 # amqp,mongodb,event,rar,ast,yac,yaconf,msgpack,igbinary,
-# seaslog,varnish,xhprof,ssh2
+# seaslog,varnish,xhprof,ssh2,yaml
 #
 # You can let it empty to avoid installing any extensions,
 # or install multi plugins as:
@@ -79,13 +79,13 @@ PHP_VERSION=7.2.25
 PHP_PHP_CONF_FILE=./services/php/php72.ini
 PHP_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP_LOG_DIR=./logs/php
-PHP_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2
+PHP_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
 
 PHP74_VERSION=7.4
 PHP74_PHP_CONF_FILE=./services/php/php74.ini
 PHP74_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP74_LOG_DIR=./logs/php
-PHP74_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2
+PHP74_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
 #
 # PHP5.6
 #

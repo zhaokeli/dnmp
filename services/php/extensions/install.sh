@@ -558,3 +558,12 @@ if [[ -z "${EXTENSIONS##*,ssh2,*}" ]]; then
         docker-php-ext-enable ssh2
     fi
 fi
+
+if [[ -z "${EXTENSIONS##*,yaml,*}" ]]; then
+    echo "---------- Install yaml ----------"
+    mkdir libyaml \
+    && tar -xf libyaml-0.2.2.tgz -C libyaml --strip-components=1 \
+    && ( cd libyaml && ./configure  && make ${MC} && make install ) \
+    &&  pecl install yaml \
+    && docker-php-ext-enable yaml
+fi
