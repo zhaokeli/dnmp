@@ -18,12 +18,10 @@ composer () {
     tty=
     tty -s && tty=--tty
 
-    if ps -p $SSH_AGENT_PID > /dev/null
-    then
-       echo "ssh-agent is already running"
-       # Do something knowing the pid exists, i.e. the process with $PID is running
+    if [ $(ps ax | grep [s]sh-agent | wc -l) -gt 0 ] ; then
+        echo "ssh-agent is already running"
     else
-    eval `ssh-agent -s`
+        eval `ssh-agent -s`
     fi
 
     docker run \
