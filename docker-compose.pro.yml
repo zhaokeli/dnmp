@@ -477,5 +477,26 @@ services:
     networks:
       - default
 
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    restart: always
+    hostname: ${GITLAB_HOSTNAME}
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url "${GITLAB_EXTERNAL_URL}"
+    ports:
+      - "${GITLAB_PORT_22}:22"
+      - "${GITLAB_PORT_80}:80"
+      - "${GITLAB_PORT_443}:443"
+    volumes:
+      - ${GITLAB_DATA_DIR}:/var/opt/gitlab
+      - ${GITLAB_LOGS_DIR}:/var/log/gitlab
+      - ${GITLAB_CONFIG_DIR}:/etc/gitlab
+    environment:
+      TZ: "Asia/Shanghai"
+    networks:
+      - default
+
 networks:
   default:

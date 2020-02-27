@@ -79,13 +79,13 @@ PHP_VERSION=7.2.25
 PHP_PHP_CONF_FILE=./services/php/php72.ini
 PHP_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP_LOG_DIR=./logs/php
-PHP_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
+PHP_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
 
 PHP74_VERSION=7.4
 PHP74_PHP_CONF_FILE=./services/php/php74.ini
 PHP74_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP74_LOG_DIR=./logs/php
-PHP74_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
+PHP74_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
 #
 # PHP5.6
 #
@@ -93,7 +93,7 @@ PHP56_VERSION=5.6.40
 PHP56_PHP_CONF_FILE=./services/php/php56.ini
 PHP56_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP56_LOG_DIR=./logs/php
-PHP56_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb
+PHP56_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb
 
 #
 # PHP5.4
@@ -273,3 +273,15 @@ VPN_USER=your_vpn_username
 VPN_PASSWORD=your_vpn_password
 VPN_PORT0=500
 VPN_PORT1=4500
+
+#
+# gitlab
+#
+GITLAB_DATA_DIR=./data/gitlab
+GITLAB_LOGS_DIR=./logs/gitlab
+GITLAB_CONFIG_DIR=./services/gitlab
+GITLAB_PORT_80=10080
+GITLAB_PORT_22=10022
+GITLAB_PORT_443=10443
+GITLAB_HOSTNAME=gitlab.example.com
+GITLAB_EXTERNAL_URL=https://gitlab.example.com
