@@ -24,3 +24,6 @@ gitlab_rails['smtp_authentication'] = "login"
 gitlab_rails['smtp_enable_starttls_auto'] = true
 gitlab_rails['smtp_tls'] = true
 gitlab_rails['gitlab_email_from'] = '528752273@qq.com'
+
+# 备份保存7天的
+gitlab_rails['backup_keep_time'] = 604800
