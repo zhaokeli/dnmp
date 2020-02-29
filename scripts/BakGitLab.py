@@ -14,7 +14,7 @@ def runCmd(cmd):
     res = result.read()
     str = ''
     for line in res.splitlines():
-        print(line)
+        # print(line)
         str = str + line
     return str
 
