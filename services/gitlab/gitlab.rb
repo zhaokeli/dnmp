@@ -27,3 +27,4 @@ gitlab_rails['gitlab_email_from'] = '528752273@qq.com'
 
 # 备份保存7天的
 gitlab_rails['backup_keep_time'] = 604800
+gitlab_rails['time_zone'] = 'Asia/Shanghai'
