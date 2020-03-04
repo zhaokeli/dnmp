@@ -15,7 +15,7 @@ echo
 
 
 if [ "${PHP_EXTENSIONS}" != "" ]; then
-    apk add --no-cache autoconf g++ libtool make curl-dev gettext-dev linux-headers
+    apk --update add --no-cache --virtual .build-deps autoconf g++ libtool make curl-dev gettext-dev linux-headers
 fi
 
 
@@ -200,9 +200,29 @@ fi
 
 if [[ -z "${EXTENSIONS##*,gd,*}" ]]; then
     echo "---------- Install gd ----------"
-    apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install ${MC} gd
+    isPhpVersionGreaterOrEqual 7 4
+
+    if [[ "$?" = "1" ]]; then
+        # "--with-xxx-dir" was removed from php 7.4,
+        # issue: https://github.com/docker-library/php/issues/912
+        options="--with-freetype --with-jpeg"
+    else
+        options="--with-gd --with-freetype-dir=/usr/include/ --with-png-dir=/usr/include/ --with-jpeg-dir=/usr/include/"
+    fi
+
+    apk add --no-cache \
+        freetype \
+        freetype-dev \
+        libpng \
+        libpng-dev \
+        libjpeg-turbo \
+        libjpeg-turbo-dev \
+    && docker-php-ext-configure gd ${options} \
+    && docker-php-ext-install ${MC} gd \
+    && apk del \
+        freetype-dev \
+        libpng-dev \
+        libjpeg-turbo-dev
 fi
 
 if [[ -z "${EXTENSIONS##*,intl,*}" ]]; then
@@ -340,6 +360,19 @@ if [[ -z "${EXTENSIONS##*,yac,*}" ]]; then
     docker-php-ext-enable yac
 fi
 
+if [[ -z "${EXTENSIONS##*,yar,*}" ]]; then
+    isPhpVersionGreaterOrEqual 7 0
+    if [[ "$?" = "1" ]]; then
+        echo "---------- Install yar ----------"
+        printf "\n" | pecl install yar
+        docker-php-ext-enable yar
+    else
+        echo "yar requires PHP >= 7.0.0, installed version is ${PHP_VERSION}"
+    fi
+
+fi
+
+
 if [[ -z "${EXTENSIONS##*,yaconf,*}" ]]; then
     echo "---------- Install yaconf ----------"
     printf "\n" | pecl install yaconf
@@ -454,12 +487,27 @@ if [[ -z "${EXTENSIONS##*,memcached,*}" ]]; then
     docker-php-ext-enable memcached
 fi
 
+if [[ -z "${EXTENSIONS##*,memcache,*}" ]]; then
+    echo "---------- Install memcache ----------"
+    isPhpVersionGreaterOrEqual 7 0
+    if [[ "$?" = "1" ]]; then
+        installExtensionFromTgz memcache-4.0.5.2
+    else
+        installExtensionFromTgz memcache-2.2.6
+    fi
+fi
+
 if [[ -z "${EXTENSIONS##*,xdebug,*}" ]]; then
     echo "---------- Install xdebug ----------"
     isPhpVersionGreaterOrEqual 7 0
 
     if [[ "$?" = "1" ]]; then
-        installExtensionFromTgz xdebug-2.6.1
+        isPhpVersionGreaterOrEqual 7 4
+        if [[ "$?" = "1" ]]; then
+            installExtensionFromTgz xdebug-2.9.2
+        else
+            installExtensionFromTgz xdebug-2.6.1
+        fi
     else
         installExtensionFromTgz xdebug-2.5.5
     fi
@@ -512,7 +560,11 @@ if [[ -z "${EXTENSIONS##*,zip,*}" ]]; then
     echo "---------- Install zip ----------"
     # Fix: https://github.com/docker-library/php/issues/797
     apk add --no-cache libzip-dev
-    docker-php-ext-configure zip --with-libzip=/usr/include
+
+    isPhpVersionGreaterOrEqual 7 4
+    if [[ "$?" != "1" ]]; then
+        docker-php-ext-configure zip --with-libzip=/usr/include
+    fi
 
 	docker-php-ext-install ${MC} zip
 fi
@@ -566,4 +618,9 @@ if [[ -z "${EXTENSIONS##*,yaml,*}" ]]; then
     && ( cd libyaml && ./configure  && make ${MC} && make install ) \
     &&  pecl install yaml \
     && docker-php-ext-enable yaml
+fi
+
+if [ "${PHP_EXTENSIONS}" != "" ]; then
+    apk del .build-deps \
+    && docker-php-source delete
 fi

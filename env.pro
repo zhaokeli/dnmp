@@ -69,7 +69,7 @@ OPENRESTY_LOG_DIR=./logs/nginx
 # recode,tidy,gmp,imap,ldap,imagick,sqlsrv,mcrypt,opcache,
 # redis,memcached,xdebug,swoole,pdo_sqlsrv,sodium,yaf,mysql,
 # amqp,mongodb,event,rar,ast,yac,yaconf,msgpack,igbinary,
-# seaslog,varnish,xhprof,ssh2,yaml
+# seaslog,varnish,xhprof,ssh2,yaml,yar
 #
 # You can let it empty to avoid installing any extensions,
 # or install multi plugins as:
