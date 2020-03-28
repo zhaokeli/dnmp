@@ -35,8 +35,6 @@ services:
         PHP_EXTENSIONS: ${PHP_EXTENSIONS}
         TZ: "$TZ"
     container_name: php
-    expose:
-      - 9501
     extra_hosts:
       - "www.site1.com:172.17.0.1"
     volumes:
@@ -50,7 +48,72 @@ services:
       - SYS_PTRACE
     networks:
       - default
+
+  php71:
+    container_name: php71
+    build:
+      context: ./services/php
+      args:
+        PHP_VERSION: php:${PHP71_VERSION}-fpm-alpine
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+        PHP_EXTENSIONS: ${PHP71_EXTENSIONS}
+        TZ: "$TZ"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${SOURCE_DIR}:/www/:rw
+      - ${PHP71_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP71_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP71_LOG_DIR}:/var/log/php
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
+
+  php72:
+    container_name: php72
+    build:
+      context: ./services/php
+      args:
+        PHP_VERSION: php:${PHP72_VERSION}-fpm-alpine
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+        PHP_EXTENSIONS: ${PHP72_EXTENSIONS}
+        TZ: "$TZ"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${SOURCE_DIR}:/www/:rw
+      - ${PHP72_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP72_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP72_LOG_DIR}:/var/log/php
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
+
+  php73:
+    container_name: php73
+    build:
+      context: ./services/php
+      args:
+        PHP_VERSION: php:${PHP73_VERSION}-fpm-alpine
+        CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
+        PHP_EXTENSIONS: ${PHP73_EXTENSIONS}
+        TZ: "$TZ"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ${SOURCE_DIR}:/www/:rw
+      - ${PHP73_PHP_CONF_FILE}:/usr/local/etc/php/php.ini:ro
+      - ${PHP73_FPM_CONF_FILE}:/usr/local/etc/php-fpm.d/www.conf:rw
+      - ${PHP73_LOG_DIR}:/var/log/php
+    restart: always
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - default
+
   php74:
+    container_name: php74
     build:
       context: ./services/php
       args:
@@ -58,9 +121,6 @@ services:
         CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
         PHP_EXTENSIONS: ${PHP74_EXTENSIONS}
         TZ: "$TZ"
-    container_name: php74
-    expose:
-      - 9501
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${SOURCE_DIR}:/www/:rw
@@ -82,8 +142,6 @@ services:
         PHP_EXTENSIONS: ${PHP56_EXTENSIONS}
         TZ: "$TZ"
     container_name: php56
-    expose:
-      - 9501
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${SOURCE_DIR}:/www/:rw
@@ -447,7 +505,7 @@ services:
   #   image: jenkins/jenkins:lts
   #   container_name: jenkins
   #   environment:
-  #      DOCKER_URL: ''
+  #     - JAVA_OPTS=-Duser.timezone=Asia/Shanghai
   #   volumes:
   #     - /etc/localtime:/etc/localtime:ro
   #     - ${DATA_DIR}/jenkins:/var/jenkins_home
@@ -484,9 +542,10 @@ services:
     hostname: ${GITLAB_HOSTNAME}
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url "${GITLAB_EXTERNAL_URL}"
+        external_url '${GITLAB_EXTERNAL_URL}'
+        gitlab_rails['gitlab_shell_ssh_port'] = ${GITLAB_PORT_22}
     ports:
-      - "${GITLAB_PORT_22}:22"
+      - "${GITLAB_PORT_22}:${GITLAB_PORT_22}"
       - "${GITLAB_PORT_80}:80"
       - "${GITLAB_PORT_443}:443"
     volumes:

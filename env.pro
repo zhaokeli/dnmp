@@ -75,17 +75,29 @@ OPENRESTY_LOG_DIR=./logs/nginx
 # or install multi plugins as:
 # PHP_EXTENSIONS=pdo_mysql,mysqli,gd,curl,opcache
 #
-PHP_VERSION=7.2.25
-PHP_PHP_CONF_FILE=./services/php/php72.ini
+PHP_VERSION=7.1
+PHP_PHP_CONF_FILE=./services/php/php.ini
 PHP_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP_LOG_DIR=./logs/php
-PHP_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
+PHP_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,bcmath,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
+
+PHP72_VERSION=7.2
+PHP72_PHP_CONF_FILE=./services/php/php.ini
+PHP72_FPM_CONF_FILE=./services/php/php-fpm.conf
+PHP72_LOG_DIR=./logs/php
+PHP72_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,bcmath,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
+
+PHP73_VERSION=7.3
+PHP73_PHP_CONF_FILE=./services/php/php.ini
+PHP73_FPM_CONF_FILE=./services/php/php-fpm.conf
+PHP73_LOG_DIR=./logs/php
+PHP73_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,bcmath,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
 
 PHP74_VERSION=7.4
 PHP74_PHP_CONF_FILE=./services/php/php74.ini
 PHP74_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP74_LOG_DIR=./logs/php
-PHP74_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
+PHP74_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,bcmath,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
 #
 # PHP5.6
 #
@@ -93,7 +105,7 @@ PHP56_VERSION=5.6.40
 PHP56_PHP_CONF_FILE=./services/php/php56.ini
 PHP56_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP56_LOG_DIR=./logs/php
-PHP56_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb
+PHP56_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,bcmath,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb
 
 #
 # PHP5.4
