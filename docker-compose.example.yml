@@ -35,6 +35,8 @@ services:
         PHP_EXTENSIONS: ${PHP_EXTENSIONS}
         TZ: "$TZ"
     container_name: php
+    ports:
+      - "${PHP_XDEBUG_REMOTE_PORT}:${PHP_XDEBUG_REMOTE_PORT}"
     extra_hosts:
       - "www.site1.com:172.17.0.1"
     volumes:
@@ -58,6 +60,8 @@ services:
         CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
         PHP_EXTENSIONS: ${PHP71_EXTENSIONS}
         TZ: "$TZ"
+    ports:
+      - "${PHP71_XDEBUG_REMOTE_PORT}:${PHP71_XDEBUG_REMOTE_PORT}"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${SOURCE_DIR}:/www/:rw
@@ -79,6 +83,8 @@ services:
         CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
         PHP_EXTENSIONS: ${PHP72_EXTENSIONS}
         TZ: "$TZ"
+    ports:
+      - "${PHP72_XDEBUG_REMOTE_PORT}:${PHP72_XDEBUG_REMOTE_PORT}"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${SOURCE_DIR}:/www/:rw
@@ -100,6 +106,8 @@ services:
         CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
         PHP_EXTENSIONS: ${PHP73_EXTENSIONS}
         TZ: "$TZ"
+    ports:
+      - "${PHP73_XDEBUG_REMOTE_PORT}:${PHP73_XDEBUG_REMOTE_PORT}"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${SOURCE_DIR}:/www/:rw
@@ -121,6 +129,8 @@ services:
         CONTAINER_PACKAGE_URL: ${CONTAINER_PACKAGE_URL}
         PHP_EXTENSIONS: ${PHP74_EXTENSIONS}
         TZ: "$TZ"
+    ports:
+      - "${PHP74_XDEBUG_REMOTE_PORT}:${PHP74_XDEBUG_REMOTE_PORT}"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${SOURCE_DIR}:/www/:rw
@@ -142,6 +152,8 @@ services:
         PHP_EXTENSIONS: ${PHP56_EXTENSIONS}
         TZ: "$TZ"
     container_name: php56
+    ports:
+      - "${PHP56_XDEBUG_REMOTE_PORT}:${PHP56_XDEBUG_REMOTE_PORT}"
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ${SOURCE_DIR}:/www/:rw
@@ -163,6 +175,8 @@ services:
   #      PHP_EXTENSIONS: ${PHP54_EXTENSIONS}
   #      TZ: "$TZ"
   #  container_name: php54
+  #  ports:
+  #    - "${PHP54_XDEBUG_REMOTE_PORT}:${PHP54_XDEBUG_REMOTE_PORT}"
   #  volumes:
   #    - /etc/localtime:/etc/localtime:ro
   #    - ${SOURCE_DIR}:/www/:rw
