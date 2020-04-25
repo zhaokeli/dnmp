@@ -546,5 +546,19 @@ services:
     networks:
       - default
 
+    gitlab-runner:
+      image: gitlab/gitlab-runner:latest
+      container_name: gitlab-runner
+      restart: always
+      depends_on:
+        - gitlab
+      privileged: true
+      volumes:
+        - ${GITLAB_RUNNER_DATA_DIR}:/etc/gitlab-runner
+        - /var/run/docker.sock:/var/run/docker.sock
+        - /bin/docker:/bin/docker
+      networks:
+        - default
+
 networks:
   default:
