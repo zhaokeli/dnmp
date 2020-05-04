@@ -546,19 +546,30 @@ services:
     networks:
       - default
 
-    gitlab-runner:
-      image: gitlab/gitlab-runner:latest
-      container_name: gitlab-runner
-      restart: always
-      depends_on:
-        - gitlab
-      privileged: true
-      volumes:
-        - ${GITLAB_RUNNER_DATA_DIR}:/etc/gitlab-runner
-        - /var/run/docker.sock:/var/run/docker.sock
-        - /bin/docker:/bin/docker
-      networks:
-        - default
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    container_name: gitlab-runner
+    restart: always
+    depends_on:
+      - gitlab
+    privileged: true
+    volumes:
+      - ${GITLAB_RUNNER_DATA_DIR}:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /bin/docker:/bin/docker
+    networks:
+      - default
 
+  gogs:
+    image: gogs/gogs
+    container_name: gogs
+    ports:
+      - "${GOGS_SSH_PORT}:22"
+      - "${GOGS_HTTP_PORT}:3000"
+    volumes:
+      - ${GOGS_DATA_DIR}:/data
+    restart: always
+    networks:
+      - default
 networks:
   default:

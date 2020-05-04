@@ -39,7 +39,9 @@ composer () {
         composer "$@"
 }
 alias dnginx='docker exec -it openresty /bin/sh'
-alias dphp='docker exec -it php /bin/sh'
+alias dphp71='docker exec -it php71 /bin/sh'
+alias dphp72='docker exec -it php72 /bin/sh'
+alias dphp73='docker exec -it php73 /bin/sh'
 alias dphp74='docker exec -it php74 /bin/sh'
 alias dphp56='docker exec -it php56 /bin/sh'
 alias dmysql='docker exec -it mysql /bin/bash'
