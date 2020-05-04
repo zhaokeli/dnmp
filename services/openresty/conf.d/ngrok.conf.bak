@@ -1,0 +1,22 @@
+# upstream ngrokserver{
+#       server    172.18.0.14:80;
+# }
+server {
+        listen       80;
+        listen       443 ssl;
+        server_name  *.ngrok.59vip.cn ngrok.59vip.cn;
+		# 这里要注释掉
+        # ssl on;
+		ssl_certificate      /ssl/1_test.ngrok.59vip.cn_bundle.crt;
+		ssl_certificate_key  /ssl/2_test.ngrok.59vip.cn.key;
+        # keepalive_timeout 70;
+        location / {
+            # proxy_set_header X-Real-IP $remote_addr;
+            # proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            # proxy_set_header Host  172.18.0.14:80;
+            # proxy_set_header X-Nginx-Proxy true;
+            # proxy_set_header Connection "";
+            # proxy_pass      http://ngrokserver;
+            proxy_pass  http://172.18.0.1:8082;
+        }
+}

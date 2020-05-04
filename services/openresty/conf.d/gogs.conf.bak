@@ -1,0 +1,16 @@
+server {
+        listen       80;
+        server_name  git.zkeli.com;
+        return      301  https://git.zkeli.com$request_uri;
+}
+server {
+        listen       443 ssl;
+        server_name  git.zkeli.com;
+        # ssl on;
+        ssl_certificate      /ssl/1_git.zkeli.com_bundle.crt;
+        ssl_certificate_key  /ssl/2_git.zkeli.com.key;
+
+    location / {
+        proxy_pass http://gogs:3000;
+    }
+}
