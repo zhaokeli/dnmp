@@ -77,32 +77,32 @@ OPENRESTY_LOG_DIR=./logs/nginx
 #
 
 PHP71_VERSION=7.1
-PHP71_PHP_CONF_FILE=./services/php/php1.ini
+PHP71_PHP_CONF_FILE=./services/php/php71.ini
 PHP71_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP71_LOG_DIR=./logs/php
 PHP71_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,bcmath,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
-PHP71_XDEBUG_REMOTE_PORT=9710
+
 
 PHP72_VERSION=7.2
-PHP72_PHP_CONF_FILE=./services/php/php2.ini
+PHP72_PHP_CONF_FILE=./services/php/php72.ini
 PHP72_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP72_LOG_DIR=./logs/php
 PHP72_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,bcmath,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
-PHP72_XDEBUG_REMOTE_PORT=9720
+
 
 PHP73_VERSION=7.3
-PHP73_PHP_CONF_FILE=./services/php/php3.ini
+PHP73_PHP_CONF_FILE=./services/php/php73.ini
 PHP73_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP73_LOG_DIR=./logs/php
 PHP73_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,bcmath,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
-PHP73_XDEBUG_REMOTE_PORT=9730
+
 
 PHP74_VERSION=7.4
 PHP74_PHP_CONF_FILE=./services/php/php74.ini
 PHP74_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP74_LOG_DIR=./logs/php
 PHP74_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,bcmath,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb,ssh2,yaml
-PHP74_XDEBUG_REMOTE_PORT=9740
+
 
 #
 # PHP5.6
@@ -112,7 +112,7 @@ PHP56_PHP_CONF_FILE=./services/php/php56.ini
 PHP56_FPM_CONF_FILE=./services/php/php-fpm.conf
 PHP56_LOG_DIR=./logs/php
 PHP56_EXTENSIONS=pdo_mysql,zip,mysqli,mbstring,bcmath,gd,curl,opcache,redis,amqp,mcrypt,swoole,mongodb
-PHP56_XDEBUG_REMOTE_PORT=9560
+
 #
 # PHP5.4
 #
@@ -121,7 +121,7 @@ PHP54_PHP_CONF_FILE=./services/php54/php54.ini
 PHP54_FPM_CONF_FILE=./services/php54/php-fpm.conf
 PHP54_LOG_DIR=./logs/php
 PHP54_EXTENSIONS=pdo_mysql,mysqli,mbstring,gd,curl,opcache
-PHP54_XDEBUG_REMOTE_PORT=9540
+
 #
 # RABBITMQ
 #

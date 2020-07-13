@@ -48,6 +48,8 @@ alias dmysql='docker exec -it mysql /bin/bash'
 alias dredis='docker exec -it redis /bin/sh'
 alias dngrok='docker exec -it ngrok /bin/sh'
 alias dscm='docker exec -it scm-manager /bin/sh'
+alias dgogs='docker exec -it gogs /bin/sh'
+alias djenkins='docker exec -it jenkins /bin/sh'
 
 
 export PATH=$PATH:/root/dnmp/composer/vendor/bin

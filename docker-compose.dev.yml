@@ -500,6 +500,7 @@ services:
   #     - ${DATA_DIR}/jenkins:/var/jenkins_home
   #     - /var/run/docker.sock:/var/run/docker.sock
   #     - ${JENKINS_SSH_DIR}:/var/jenkins_home/.ssh
+  #   restart: always
   #   ports:
   #     - "${JENKINS_PORT}:8080"
   #     - "${JENKINS_JNLP_PORT}:50000"
@@ -565,7 +566,7 @@ services:
     container_name: gogs
     ports:
       - "${GOGS_SSH_PORT}:22"
-      - "${GOGS_HTTP_PORT}:3000"
+      # - "${GOGS_HTTP_PORT}:3000"
     volumes:
       - ${GOGS_DATA_DIR}:/data
     restart: always
