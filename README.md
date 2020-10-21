@@ -164,6 +164,10 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
     with Xdebug v2.6.1, Copyright (c) 2002-2018, by Derick Rethans
 ```
 ### 3.4 使用composer
+先创建容器
+``` bash
+docker build . -t ank/composer
+```
 **我们建议在主机HOST中使用composer，避免PHP容器变得庞大**。
 1. 在主机创建一个目录，用以保存composer的配置和缓存文件：
     ```
@@ -183,7 +187,7 @@ Zend Engine v3.2.0, Copyright (c) 1998-2018 Zend Technologies
             --volume /etc/passwd:/etc/passwd:ro \
             --volume /etc/group:/etc/group:ro \
             --volume $(pwd):/app \
-            composer "$@"
+            ank/composer "$@"
     }
 
     ```
